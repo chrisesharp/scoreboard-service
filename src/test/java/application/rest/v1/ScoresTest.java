@@ -103,7 +103,8 @@ public class ScoresTest {
     }
         
     Response scoresResponse = scoreboard.scores();
-    List<Score> results = scoresResponse.readEntity(List.class);
+    @SuppressWarnings("unchecked")
+    List<Score> results = (List<Score>)scoresResponse.readEntity(List.class);
     assertEquals(10, results.size());
   }
 }

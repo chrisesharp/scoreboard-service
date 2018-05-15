@@ -3,7 +3,7 @@
 /.m2
 /load-test/*/
 
-
+/swagger-generated
 /.classpath
 /.project
 /.settings

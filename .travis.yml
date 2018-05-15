@@ -1,0 +1,13 @@
+language: java
+
+script: 
+  - make all
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: swagger-generated/target/swagger-java-client-1.0.0-tests.jar
+  skip_cleanup: true
+  on:
+    tags: true
+  
