@@ -5,6 +5,8 @@ script:
 
 deploy:
   provider: releases
+  api_key:
+    secure: 7soAnTz_UWlrpcJ26q8yqA
   file: swagger-generated/target/swagger-java-client-1.0.0-tests.jar
   skip_cleanup: true
   on:
