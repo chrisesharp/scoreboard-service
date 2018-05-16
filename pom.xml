@@ -277,24 +277,6 @@
                     <reportsDirectory>${project.build.directory}/test-reports/it</reportsDirectory>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>io.swagger</groupId>
-                <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>2.3.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/swagger.json</inputSpec>
-                            <language>java</language>
-                            <output>${project.basedir}/swagger-generated</output>
-                        </configuration>
-                    </execution>
-                </executions>
-              </plugin>
         </plugins>
     </build>
 
