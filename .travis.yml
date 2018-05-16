@@ -8,3 +8,6 @@ deploy:
   file: swagger-generated/target/swagger-java-client-1.0.0-tests.jar
   on:
     repo: chrisesharp/scoreboard-service
+    branches:
+      only:
+        - master
