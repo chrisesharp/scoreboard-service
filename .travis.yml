@@ -1,11 +1,15 @@
 language: java
 script:
 - make all
+
+after_success:
+  - cp swagger-generated/target/swagger-java-client-1.0.0-tests.jar  swagger-java-client-1.0.0-tests.jar
+
 deploy:
   provider: releases
   api_key:
     secure: cC1MhUHWcRJhWu8RL7Ee59zeIVyIUMAZXzm/hMXTY98/0SKGWzr653zdv1BP0XDenySZ4JC9NvCWoLQ6Maa8EN0ttaAwoftQwW/iiGuGb+khNBQuHsgGYT7NUbMpIAtpOKwsKXKEMBO6ZKihGq3xEVRC3Di8UfE9li0REdoOqLSLbRET6blpmQ7t5u6rm77Gvi5C1CquC+bXGqQcLGZckROeJhvZwvB8Ok+MsqDND9mF1bc1EAtf/db/1CzfDur/juLHxTthq72d+h06PaYNYhwyMKUP0RUxmLXhmGUFC+jPtljZYW2X+dpyRBMiPCM76R8GMFev3rrhTuhMCSVV4maN9jSQltU+lrXEFXRYyIbWPfuNgtZu7xXQK2kT/r6peMKezAAdNI6kEUmXzMR4IoZU3/O9QYQZauNADO6LuOxqJCiXhd4UZB/YUEVP7WWhBKwwpHH8SkxNZWpsa07w7TGu7dbc11V0MOoXvEu+nsiXrtdAE85GecG0iGrIdsbX8Jss4w920URKTYwY3U5ymmckNJGFdOVRLSMyleJwo9E4QVYLNMjuF/+lU4JJj/GCs5KNldZ3H06JkOiG8cpmkpleDLrz14zW91DVw27lCiv0resD2dtCbGJvzGAKWfaciTzam/G70eMRYBtfL9bptE0//Be/MQKosFNLn/b2w/s=
-  file: swagger-generated/target/swagger-java-client-1.0.0-tests.jar
+  file: swagger-java-client-1.0.0-tests.jar
+  skip_cleanup: true
   on:
-    repo: chrisesharp/scoreboard-service
-    all_branches: true
+    tags: true
