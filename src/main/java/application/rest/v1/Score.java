@@ -1,7 +1,13 @@
 package application.rest.v1;
 
+import io.swagger.annotations.*;
+
+@Api(tags={"Scoreboard"})
+@ApiModel()
 public class Score implements Comparable<Score> {
+  @ApiModelProperty(required = true, example = "chris")
   private String player;
+  @ApiModelProperty(required = true, example = "10000")
   private int score;
   
   public Score() {

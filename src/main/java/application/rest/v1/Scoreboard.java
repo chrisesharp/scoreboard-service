@@ -11,21 +11,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import io.swagger.annotations.*;
 import java.util.ArrayList;
 
+
 @ApplicationScoped
+@Api(tags={"Scoreboard"})
 @Path("v1/scores")
 public class Scoreboard {
   
   private List<Score> scoreboard = new ArrayList<>();
 
   @GET
+  @ApiOperation(value = "Get scores as a list", responseContainer = "array", response = Score.class)
   @Produces(MediaType.APPLICATION_JSON)
   public Response scores() {
     return Response.ok(scoreboard).build();
   }
 
   @POST
+  @ApiOperation("Post a score to the scoreboard")
   @Consumes(MediaType.APPLICATION_JSON)
   public synchronized void addScore(Score score) {
     scoreboard = Stream
