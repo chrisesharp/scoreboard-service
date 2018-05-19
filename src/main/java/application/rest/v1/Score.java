@@ -10,7 +10,7 @@ public class Score implements Comparable<Score> {
   @ApiModelProperty(required = true, example = "10000")
   private int score;
   
-  public Score() {
+  protected Score() {
     
   }
   

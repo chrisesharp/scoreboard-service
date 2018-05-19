@@ -39,8 +39,12 @@ public class ScoresTest {
     Scoreboard scoreboard = new Scoreboard();
     Score ourScore1 = new Score("chris", 100);
     Score ourScore2 = new Score("david", 200);
-    scoreboard.addScore(ourScore1);
-    scoreboard.addScore(ourScore2);
+    Response resp = scoreboard.addScore(ourScore1);
+    String reply = resp.readEntity(String.class);
+    System.out.println("Reply from first add " + reply);
+    resp = scoreboard.addScore(ourScore2);
+    reply = resp.readEntity(String.class);
+    System.out.println("Reply from second add " + reply);
     
     Response scoresResponse = scoreboard.scores();
     assertEquals(expected, scoresResponse.readEntity(List.class));
