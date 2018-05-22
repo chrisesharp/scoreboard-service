@@ -11,7 +11,7 @@ import io.swagger.annotations.*;
 @SwaggerDefinition(
   info = @Info(
             description = "Leaderboard REST service",
-            version = "v1",
+            version = "1.0.0",
             title = "Leaderboard API"
   ),
   tags = {
