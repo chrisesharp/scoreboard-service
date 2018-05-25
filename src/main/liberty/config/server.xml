@@ -1,8 +1,12 @@
 <server description="Sample Liberty server">
 
   <featureManager>
-      <feature>microprofile-1.2</feature>
       <feature>apiDiscovery-1.0</feature>
+      <feature>mpHealth-1.0</feature>
+      <feature>mpConfig-1.2</feature>
+      <feature>jaxrs-2.0</feature>
+      <feature>cdi-1.2</feature>
+      <feature>jpa-2.1</feature>
   </featureManager>
 
   <httpEndpoint httpPort="${default.http.port}" httpsPort="${default.https.port}"
@@ -12,5 +16,25 @@
   <applicationManager autoExpand="true"/>
 
   <webApplication name="leaderboard" location="${app.location}"/>
+
+  <dataSource id="postgresql-db" jdbcDriverRef="postgresql-driver" jndiName="jdbc/db"
+      transactional="true" type="javax.sql.ConnectionPoolDataSource">
+    <properties
+      databaseName="postgres"
+      user="${env.POSTGRES_USER}"
+      password="${env.POSTGRES_PASSWORD}" 
+      portNumber="${env.POSTGRES_PORT}"
+      serverName="${env.POSTGRES_HOSTNAME}"/> 
+  </dataSource>    
+
+  <jdbcDriver id="postgresql-driver" 
+      javax.sql.XADataSource="org.postgresql.xa.PGXADataSource"
+      javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource"            
+      libraryRef="postgresql-library"/>  
+
+  <library id="postgresql-library">       
+    <fileset id="postgresql-fileset"  dir="${server.config.dir}/resources"
+      includes="postgresql-9.4.1212.jar"/>   
+  </library>
 
 </server>

@@ -2,14 +2,29 @@ package application.rest.v1;
 
 import io.swagger.annotations.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Api(tags={"Scoreboard"})
 @ApiModel()
+@Entity
 public class Score implements Comparable<Score> {
+  
+  @Column
   @ApiModelProperty(required = true, example = "chris")
   private String player;
+
+  @Column
   @ApiModelProperty(required = true, example = "10000")
   private int score;
   
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
   protected Score() {
     
   }

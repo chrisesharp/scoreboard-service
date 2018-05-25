@@ -1,5 +1,6 @@
 PORT = 32784
-IMAGE = leaderboard
+IMAGE = leaderboard:v1.0.0
+CHART = chart/leaderboard
 
 all: build docker deploy
 
@@ -14,7 +15,8 @@ docker:
 .PHONY: run
 run:
 	docker run --rm -p$(PORT):9080 $(IMAGE)
-	
+
 .PHONY: deploy
 deploy:
-	docker run --rm -d -p$(PORT):9080 $(IMAGE)
+	helm dependency build $(CHART)
+	helm upgrade --wait --install leaderboard $(CHART)
