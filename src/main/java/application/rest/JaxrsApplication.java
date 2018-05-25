@@ -1,8 +1,15 @@
 package application.rest;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import io.swagger.annotations.*;
+
+import application.rest.v1.Scoreboard;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.Tag;
 
 @ApplicationPath("/")
 @SwaggerDefinition(
@@ -17,5 +24,10 @@ import io.swagger.annotations.*;
           }
 )
 public class JaxrsApplication extends Application {
-
+  @Override
+  public Set<Object> getSingletons() {
+      Set<Object> set = new HashSet<>();
+      set.add(new Scoreboard());
+      return set;
+  }
 }

@@ -2,6 +2,8 @@
 /mc-target
 /.m2
 /load-test/*/
+/.vscode
+/chart/leaderboard/charts/*
 
 /swagger-generated
 /.classpath
