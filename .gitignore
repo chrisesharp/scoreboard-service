@@ -14,4 +14,3 @@
 /local.properties
 .*.swp
 .DS_Store
-/src/main/liberty/config/server.env
