@@ -1,14 +1,6 @@
 package application.rest.v1;
 
-import java.util.logging.Logger;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,10 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
 import application.persistence.ScoreboardInMemory;
-import application.persistence.ScoreboardJpa;
 import application.persistence.ScoreboardPersistence;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
@@ -29,34 +18,13 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@ApplicationScoped
 @Api(tags = { "Scoreboard" })
 @Path("v1/scores")
 @ApiModel()
-@Resource(lookup = "jdbc/db", name = "jdbc/db")
 public class Scoreboard {
 
-  @PersistenceContext(unitName = "scoreboardpersistenceunit")
-  private EntityManager entityManager;
-
-  @Resource
-  private UserTransaction userTransaction;
-
   @Inject
-  @ConfigProperty(name = "POSTGRES_HOSTNAME", defaultValue="")
-  private String dbHostName;
-
   private ScoreboardPersistence persistence = new ScoreboardInMemory();
-
-  private Logger log = Logger.getLogger(Scoreboard.class.getName());
-
-  @PostConstruct
-  public void init() {
-    log.info("DB Host Name: " + dbHostName);
-    if (!(dbHostName == null || dbHostName.isEmpty())) {
-      persistence = new ScoreboardJpa(entityManager, userTransaction);
-    }
-  }
 
   @GET
   @ApiOperation(value = "Get scores as a list", responseContainer = "List", response = Score.class)
