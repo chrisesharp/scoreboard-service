@@ -2,7 +2,7 @@ package application.persistence;
 
 import java.util.List;
 
-import application.rest.v1.Score;
+import application.rest.Score;
 
 public interface ScoreboardPersistence {
 

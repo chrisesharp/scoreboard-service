@@ -1,4 +1,4 @@
-package application.rest.v1;
+package application.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @Api(tags = { "Scoreboard" })
-@Path("v1/scores")
+@Path("scores")
 @ApiModel()
 public class Scoreboard {
 
@@ -38,10 +38,10 @@ public class Scoreboard {
   @ApiOperation("Post a score to the scoreboard")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  @ApiResponses({ @ApiResponse(code = 201, message = "Score added", response = String.class) })
+  @ApiResponses({ @ApiResponse(code = 200, message = "Score added", response = String.class) })
   public synchronized Response addScore(@ApiParam(required = true) Score score) {
     persistence.addScore(score);
-    return Response.ok().entity("Thanks\n").build();
+    return Response.ok().entity("Thanks").build();
   }
 
 }

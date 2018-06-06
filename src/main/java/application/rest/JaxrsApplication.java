@@ -6,7 +6,8 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-import application.rest.v1.Scoreboard;
+import application.rest.Scoreboard;
+
 import io.swagger.annotations.Info;
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;

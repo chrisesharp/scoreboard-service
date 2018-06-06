@@ -1,4 +1,4 @@
-package application.rest.v1;
+package application.rest;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.ArrayList;

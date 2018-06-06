@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 
-import application.rest.v1.Score;
+import application.rest.Score;
 
 @Default
 @ApplicationScoped

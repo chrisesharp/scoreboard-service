@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.UserTransaction;
 
-import application.rest.v1.Score;
+import application.rest.Score;
 import injection.config.ConfigAlternative;
 
 @Priority(10)

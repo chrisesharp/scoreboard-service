@@ -1,4 +1,4 @@
-package application.rest.v1;
+package application.rest;
 
 import io.swagger.annotations.*;
 

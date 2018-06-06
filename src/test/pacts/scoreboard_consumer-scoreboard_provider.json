@@ -1,0 +1,104 @@
+{
+    "provider": {
+        "name": "scoreboard_provider"
+    },
+    "consumer": {
+        "name": "scoreboard_consumer"
+    },
+    "interactions": [
+        {
+            "description": "ScoreboardConsumerPactTest test add score.",
+            "request": {
+                "method": "POST",
+                "path": "/leaderboard/scores",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "accept": "text/plain"
+                },
+                "body": {
+                    "player": "david",
+                    "score": 8000
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "body": "Thanks"
+            },
+            "providerStates": [
+                {
+                    "name": "empty scoreboard"
+                }
+            ]
+        },
+        {
+            "description": "ScoreboardConsumerPactTest test add higher score.",
+            "request": {
+                "method": "POST",
+                "path": "/leaderboard/scores",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "accept": "text/plain"
+                },
+                "body": {
+                    "player": "chris",
+                    "score": 10000
+                }
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "text/plain"
+                },
+                "body": "Thanks"
+            },
+            "providerStates": [
+                {
+                    "name": "scoreboard with low score"
+                }
+            ]
+        },
+        {
+            "description": "ScoreboardConsumerPactTest test get scores.",
+            "request": {
+                "method": "GET",
+                "path": "/leaderboard/scores",
+                "headers": {
+                    "accept": "application/json"
+                },
+                "body": ""
+            },
+            "response": {
+                "status": 200,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": [
+                    {
+                        "player": "chris",
+                        "score": 10000
+                    },
+                    {
+                        "player": "david",
+                        "score": 8000
+                    }
+                ]
+            },
+            "providerStates": [
+                {
+                    "name": "scoreboard with two scores "
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "pact-specification": {
+            "version": "3.0.0"
+        },
+        "pact-jvm": {
+            "version": "3.5.16"
+        }
+    }
+}

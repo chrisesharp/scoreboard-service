@@ -16,6 +16,12 @@ docker:
 run:
 	docker run --rm -p$(PORT):9080 $(IMAGE)
 
+.PHONY: verify
+verify:
+	mvn liberty:test-start-server
+	mvn pact:verify
+	mvn liberty:test-stop-server
+	
 .PHONY: deploy
 deploy:
 	helm dependency build $(CHART)
