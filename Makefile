@@ -4,6 +4,10 @@ CHART = chart/leaderboard
 
 all: build docker deploy
 
+.PHONY: clean
+clean:
+	mvn clean
+
 .PHONY: build
 build:
 	mvn package

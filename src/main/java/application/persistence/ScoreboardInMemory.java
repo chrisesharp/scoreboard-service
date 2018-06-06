@@ -33,5 +33,10 @@ public class ScoreboardInMemory implements ScoreboardPersistence {
         log.info("Retrieved scores from list: " + scores);
         return scores;
     }
+    
+    public void deleteAll() {
+      log.info("Deleting all scores");
+      scores = new ArrayList<>();
+    }
 
 }

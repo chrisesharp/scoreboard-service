@@ -33,7 +33,7 @@ public class ScoreboardJpa implements ScoreboardPersistence {
           entityManager.persist(score);
           userTransaction.commit();
         } catch (Exception exc) {
-            throw new RuntimeException(exc);
+          throw new RuntimeException(exc);
         }
     }
 
@@ -48,5 +48,17 @@ public class ScoreboardJpa implements ScoreboardPersistence {
         log.info("Retrieved scores from DB: " + scores);
         return scores;
     }
-
+    
+    public void deleteAll() {
+      log.info("Deleting all scores");
+      try {
+        userTransaction.begin();
+        TypedQuery<Score> deleteQuery = entityManager.createQuery("DELETE FROM Score", Score.class);
+        int i = deleteQuery.executeUpdate();
+        userTransaction.commit();
+        log.info(i + " scores deleted");
+      } catch (Exception exc) {
+        throw new RuntimeException(exc);
+      }
+    }
 }

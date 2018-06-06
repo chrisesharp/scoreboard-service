@@ -319,9 +319,9 @@
                     <host>localhost</host>
                     <port>9080</port>
                     <path>/</path>
-                    <!-- use this to set up and tear down test state
-                      <stateChangeUrl>http://localhost:32784/tasks/pactStateChange</stateChangeUrl>
-                    -->
+                    <!-- use this to set up and tear down test state -->
+                      <stateChangeUrl>http://localhost:9080/leaderboard/reset</stateChangeUrl>
+                    <!-- -->
                     <consumers>
                       <!-- Again, you can define as many consumers for each provider as you need, but each must have a unique name -->
                       <consumer>
