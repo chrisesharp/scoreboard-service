@@ -14,12 +14,12 @@ public class HealthEndpointIT {
     private String port = System.getProperty("liberty.test.port");
     private String warContext = System.getProperty("war.context");
     private String endpoint = "/health";
-    private String url = "http://localhost:" + port + "/" + warContext + endpoint;
+    private String url = "http://localhost:" + port + "/"  + endpoint;
 
     @Test
     public void testEndpoint() throws Exception {
         System.out.println("Testing endpoint " + url);
-        int maxCount = 30;
+        int maxCount = 10;
         int responseCode = makeRequest();
         for(int i = 0; (responseCode != 200) && (i < maxCount); i++) {
           System.out.println("Response code : " + responseCode + ", retrying ... (" + i + " of " + maxCount + ")");

@@ -82,5 +82,4 @@ public class Scoreboard {
     }
     return Response.ok().entity("Reset").build();
   }
-
 }
