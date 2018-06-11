@@ -10,27 +10,58 @@ import au.com.dius.pact.provider.junit.target.HttpTarget;
 import au.com.dius.pact.provider.junit.target.TestTarget;
 import au.com.dius.pact.provider.junit.loader.PactFolder;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonObject;
+import javax.json.Json;
+
+import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 
 @RunWith(PactRunner.class)
 @Provider("scoreboard_provider")
 @PactFolder("pacts")
 public class ScoresPactTest {
   private int port = Integer.parseInt(System.getProperty("liberty.test.port"));
+  private String endpoint = "/leaderboard/reset";
+  private String url = "http://localhost:" + port + "/"  + endpoint;
+  Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
   
   @TestTarget
   public final Target target = new HttpTarget(port);
 
   @State("empty scoreboard")
   public void toEmptyState() {
-    System.out.println("toEmptyState got called");
-    
+    System.out.println("Setting toEmptyState");
+    sendRequest();
   }
   @State("scoreboard with low score")
   public void toLowScoreState() {
-    System.out.println("toLowScoreState got called");
+    System.out.println("Setting toLowScoreState");
+    JsonObjectBuilder state = Json.createObjectBuilder();
+    state.add("state","scoreboard with low score");
+    sendRequest(state.build());
   }
   @State("scoreboard with two scores")
   public void toTwoScoreState() {
-    System.out.println("toTwoScoreState got called");
+    System.out.println("Setting toTwoScoreState");
+    JsonObjectBuilder state = Json.createObjectBuilder();
+    state.add("state","scoreboard with two scores");
+    sendRequest(state.build());
+  }
+  
+  private void sendRequest(JsonObject state) {
+    Invocation.Builder request = client.target(url).request();
+    Entity<JsonObject> entity = Entity.entity(state, MediaType.APPLICATION_JSON);
+    request.post(entity).close();
+  }
+  
+  private void sendRequest() {
+    Invocation.Builder request = client.target(url).request();
+    request.get().close();
   }
 }
