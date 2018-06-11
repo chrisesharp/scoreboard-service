@@ -12,7 +12,6 @@ import org.junit.Test;
 public class HealthEndpointIT {
 
     private String port = System.getProperty("liberty.test.port");
-    private String warContext = System.getProperty("war.context");
     private String endpoint = "/health";
     private String url = "http://localhost:" + port + "/"  + endpoint;
 
