@@ -20,6 +20,8 @@ import javax.json.JsonObjectBuilder;
 import javax.json.JsonObject;
 import javax.json.Json;
 
+import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
+
 @RunWith(PactRunner.class)
 @Provider("scoreboard_provider")
 @PactFolder("pacts")
@@ -27,7 +29,7 @@ public class ScoresPactTest {
   private int port = Integer.parseInt(System.getProperty("liberty.test.port"));
   private String endpoint = "/leaderboard/reset";
   private String url = "http://localhost:" + port + "/"  + endpoint;
-  Client client = ClientBuilder.newClient();
+  Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
   
   @TestTarget
   public final Target target = new HttpTarget(port);

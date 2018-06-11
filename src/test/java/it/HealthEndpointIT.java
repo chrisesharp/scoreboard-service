@@ -13,7 +13,7 @@ public class HealthEndpointIT {
 
     private String port = System.getProperty("liberty.test.port");
     private String endpoint = "/health";
-    private String url = "http://localhost:" + port + "/"  + endpoint;
+    private String url = "http://localhost:" + port + endpoint;
 
     @Test
     public void testEndpoint() throws Exception {
