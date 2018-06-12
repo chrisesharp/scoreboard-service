@@ -339,7 +339,7 @@
                       <consumer>
                         <name>scoreboard_consumer</name>
                         <!--  currently supports a file path using pactFile or a URL using pactUrl -->
-                        <pactFile>src/test/pacts/scoreboard_consumer-scoreboard_provider.json</pactFile>
+                        <pactFile>pacts/scoreboard_consumer-scoreboard_provider.json</pactFile>
                       </consumer>
                     </consumers>
                   </serviceProvider>

@@ -18,9 +18,7 @@ docker:
 
 .PHONY: verify
 verify:
-	mvn liberty:test-start-server
-	mvn pact:verify
-	mvn liberty:test-stop-server
+	mvn verify
 
 .PHONY: run
 run:
