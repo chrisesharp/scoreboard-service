@@ -4,6 +4,9 @@
       <feature>apiDiscovery-1.0</feature>
       <feature>mpHealth-1.0</feature>
       <feature>mpConfig-1.2</feature>
+      <feature>mpJwt-1.0</feature>
+      <feature>ssl-1.0</feature>
+      <feature>appSecurity-2.0</feature>
       <feature>jaxrs-2.0</feature>
       <feature>cdi-1.2</feature>
       <feature>jpa-2.1</feature>
@@ -37,5 +40,11 @@
     <fileset id="postgresql-fileset"  dir="${server.config.dir}/resources"
       includes="postgresql-9.4.1212.jar"/>   
   </library>
+    
+  <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
+  <mpJwt id="jwtUserConsumer" keyName="default" audiences="leaderboard" issuer="${jwt.issuer}"/>
+  <!-- This is the keystore that will be used by SSL and by JWT.
+       The keystore is built using the maven keytool plugin -->
+  <keyStore id="defaultKeyStore" location="keystore.jceks" type="JCEKS" password="secret" />
 
 </server>
