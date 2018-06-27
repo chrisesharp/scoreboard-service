@@ -15,9 +15,10 @@ package it;
 
 import static org.junit.Assert.assertEquals;
 
-//import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.Json;
+
 import javax.ws.rs.core.Response;
-import org.junit.Before;
 import org.junit.Test;
 import it.util.TestUtils;
 import it.util.JwtVerifier;
@@ -31,29 +32,47 @@ public class ResetEndpointTest {
 
   String authHeader;
 
-  @Before
-  public void setup() throws Exception {
-    authHeader = "Bearer " + new JwtVerifier().createAdminJwt(TESTNAME);
-  }
-
   @Test
-  public void testGetResetWithJwt() {
+  public void testGetResetWithoutAdminRole() throws Exception {
+    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
+    String resetUrl = baseUrl + RESET;
+    Response resetResponse = TestUtils.processRequest(resetUrl, "GET", null, authHeader);
+
+    assertEquals(
+        "HTTP response code should have been " + TestUtils.FORBIDDEN + ".",
+        TestUtils.FORBIDDEN, resetResponse.getStatus()
+    );
+  }
+  
+  @Test
+  public void testGetResetWithAdminRole() throws Exception {
+    String authHeader = "Bearer " + new JwtVerifier().createAdminJwt(TESTNAME);
     String resetUrl = baseUrl + RESET;
     Response resetResponse = TestUtils.processRequest(resetUrl, "GET", null, authHeader);
 
     assertEquals(
         "HTTP response code should have been " + TestUtils.OK + ".",
-        TestUtils.OK, resetResponse.getStatus());
+        TestUtils.OK, resetResponse.getStatus()
+    );
+    
+    assertEquals(
+        "Response body should have been " + TestUtils.ResetOK + ".",
+        TestUtils.ResetOK, resetResponse.readEntity(String.class)
+    );
   }
   
-  //@Test
-  public void testPostResetWithJwt() {
+  @Test
+  public void testPostResetWithoutAdminRole() throws Exception {
+    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
     String resetUrl = baseUrl + RESET;
-    Response resetResponse = TestUtils.processRequest(resetUrl, "POST", null, authHeader);
-
-    assertEquals(
-        "HTTP response code should have been " + TestUtils.OK + ".",
-        TestUtils.OK, resetResponse.getStatus());
+    JsonObjectBuilder state = Json.createObjectBuilder();
+    state.add("state","scoreboard with two scores");
+    Response resetResponse = TestUtils.processRequest(resetUrl, "POST", state.build().toString(), authHeader);
+    
+    assertEquals("HTTP response code should have been "
+        + TestUtils.FORBIDDEN + ".", TestUtils.FORBIDDEN,
+        resetResponse.getStatus()
+    );    
   }
 }
 // end::test[]

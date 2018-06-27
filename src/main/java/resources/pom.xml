@@ -62,7 +62,7 @@
                             <keysize>2048</keysize>
                             <sigalg>SHA256withRSA</sigalg>
                             <alias>default</alias>
-                            <dname>cn=localhost, ou=leaderboard, O=IBM, C=us</dname>
+                            <dname>cn=localhost, ou=backendServer, O=IBM, C=us</dname>
                             <validity>999</validity>
                             <skipIfExist>true</skipIfExist>
                         </configuration>

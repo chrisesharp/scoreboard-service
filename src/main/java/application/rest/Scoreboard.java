@@ -18,6 +18,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import javax.annotation.security.RolesAllowed;
+
 @Api(tags = { "Scoreboard" })
 @Path("/")
 @ApiModel()
@@ -49,6 +51,7 @@ public class Scoreboard {
   @GET
   @Path("reset")
   @Produces(MediaType.TEXT_PLAIN)
+  @RolesAllowed({ "admin" })
   @ApiOperation("Reset the scoreboard")
   @ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
   public synchronized Response reset() {
@@ -60,6 +63,7 @@ public class Scoreboard {
   @Path("reset")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
+  @RolesAllowed({ "admin" })
   @ApiOperation("Reset the scoreboard to a given state")
   @ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
   public synchronized Response reset(com.ibm.json.java.JSONObject request) {

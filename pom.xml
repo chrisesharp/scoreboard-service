@@ -470,6 +470,7 @@
                                 <default.http.port>${testServerHttpPort}</default.http.port>
                                 <default.https.port>${testServerHttpsPort}</default.https.port>
                                 <app.location>${project.artifactId}-${project.version}.war</app.location>
+                                <jwt.issuer>${jwt.issuer}</jwt.issuer>
                             </bootstrapProperties>
                             <installAppPackages>project</installAppPackages>
                         </configuration>

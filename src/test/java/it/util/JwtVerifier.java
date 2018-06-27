@@ -146,7 +146,7 @@ public class JwtVerifier {
         JsonObject claimsObj = Json.createObjectBuilder()
                         .add("exp", (System.currentTimeMillis() / 1000) + 300)  // Expire time
                         .add("iat", (System.currentTimeMillis() / 1000))        // Issued time
-                        .add("aud", "simpleapp")                                // Audience
+                        .add("aud", "leaderboard")                              // Audience
                         .add("jti", Long.toHexString(System.nanoTime()))        // Unique value
                         .add("sub", username)                                   // Subject
                         .add("upn", username)                                   // Subject again

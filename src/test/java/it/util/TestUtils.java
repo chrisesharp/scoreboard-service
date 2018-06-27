@@ -28,6 +28,9 @@ import javax.ws.rs.core.Response.Status;
 
 public class TestUtils {
     public static final int OK = Status.OK.getStatusCode();
+    public static final int FORBIDDEN = Status.FORBIDDEN.getStatusCode();
+    public static final String ResetOK = "Reset";
+    
     public static Response processRequest(String url, String method, String payload,
             String authHeader) {
         Client client = ClientBuilder.newClient();
