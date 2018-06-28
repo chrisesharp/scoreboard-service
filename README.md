@@ -1,4 +1,4 @@
-# Leaderboard Service
+# scoreboard Service
 
 ## Build
 

@@ -25,7 +25,7 @@ import it.util.JwtVerifier;
 
 public class ResetEndpointTest {
 
-  private final String RESET = "/leaderboard/reset";
+  private final String RESET = "/scoreboard/reset";
   private final String TESTNAME = "TESTUSER";
 
   String baseUrl = "https://localhost:" + System.getProperty("liberty.test.ssl.port");

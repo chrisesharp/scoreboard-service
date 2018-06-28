@@ -27,7 +27,7 @@ import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 @PactFolder("pacts")
 public class ScoresPactTest {
   private int port = Integer.parseInt(System.getProperty("liberty.test.port"));
-  private String endpoint = "/leaderboard/reset";
+  private String endpoint = "/scoreboard/reset";
   private String url = "http://localhost:" + port + endpoint;
   Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
   

@@ -4,7 +4,7 @@
 /.m2
 /load-test/*/
 /.vscode
-/chart/leaderboard/charts/*
+/chart/scoreboard/charts/*
 
 /swagger-generated
 /.classpath

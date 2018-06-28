@@ -17,7 +17,7 @@ public class RootEndpoint {
   @Produces(MediaType.APPLICATION_JSON)
   public Response listResources(@Context UriInfo uriInfo) {
     String healthURL = (uriInfo.getAbsolutePath() + "/health").replaceAll("(?<!http:)\\/\\/", "/");
-    String scoresURL = (uriInfo.getAbsolutePath() + "/leaderboard/scores").replaceAll("(?<!http:)\\/\\/", "/");
+    String scoresURL = (uriInfo.getAbsolutePath() + "/scoreboard/scores").replaceAll("(?<!http:)\\/\\/", "/");
     return Response.ok("{\"health\":\"" + healthURL + "\",\"scores\":\"" + scoresURL + "\"}").build();
   }
 

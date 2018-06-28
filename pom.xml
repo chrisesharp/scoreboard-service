@@ -31,6 +31,6 @@
       </repository>
     </repositories>
     <modules>
-      <module>foo-module</module>
+      <module>scoreboardService</module>
     </modules>
 </project>

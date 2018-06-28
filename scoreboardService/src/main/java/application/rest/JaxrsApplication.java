@@ -15,9 +15,9 @@ import io.swagger.annotations.Tag;
 @ApplicationPath("/")
 @SwaggerDefinition(
   info = @Info(
-            description = "Leaderboard REST service",
+            description = "scoreboard REST service",
             version = "1.0.0",
-            title = "Leaderboard API"
+            title = "scoreboard API"
   ),
   tags = {
           @Tag(name = "Scoreboard",

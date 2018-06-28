@@ -1,6 +1,6 @@
 PORT = 32784
-IMAGE = leaderboard:v1.0.0
-CHART = chart/leaderboard
+IMAGE = scoreboard:v1.0.0
+CHART = chart/scoreboard
 
 all: build docker
 
@@ -27,4 +27,4 @@ run:
 .PHONY: install
 install:
 	helm dependency build $(CHART)
-	helm upgrade --wait --install leaderboard $(CHART)
+	helm upgrade --wait --install scoreboard $(CHART)
