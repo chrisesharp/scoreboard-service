@@ -18,6 +18,39 @@
             <url>file://${project.build.directory}/mvn-repo</url>
         </repository>
     </distributionManagement>
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.0.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>3.1.11</version>
+            <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>  
     <repositories>
       <repository>
         <id>oss.sonatype.org-snapshot</id>
@@ -32,5 +65,6 @@
     </repositories>
     <modules>
       <module>scoreboardService</module>
+      <module>keystore</module>
     </modules>
 </project>
