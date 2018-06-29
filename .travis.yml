@@ -6,3 +6,5 @@ cache:
 script:
   - make build
   - make verify
+after_success:
+  - make coverage
