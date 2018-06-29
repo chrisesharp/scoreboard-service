@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/chrisesharp/scoreboard-service.svg?branch=master)](https://travis-ci.org/chrisesharp/scoreboard-service)
 # scoreboard Service
 
 ## Build
