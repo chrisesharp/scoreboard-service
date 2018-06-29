@@ -11,6 +11,9 @@
 /.project
 /.settings
 /keystore/src/main/resources/keystore.jceks
+*/.settings
+*/.classpath
+*/.project
 /caches
 /local.properties
 .*.swp
