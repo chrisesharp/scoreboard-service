@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/chrisesharp/scoreboard-service.svg?branch=master)](https://travis-ci.org/chrisesharp/scoreboard-service)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/81212ba902b34f80b54b806a1968e196)](https://www.codacy.com/app/chrisesharp/scoreboard-service?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=chrisesharp/scoreboard-service&amp;utm_campaign=Badge_Grade)
 # scoreboard Service
 
 ## Build
