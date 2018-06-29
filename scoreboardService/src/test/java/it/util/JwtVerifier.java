@@ -162,7 +162,7 @@ public class JwtVerifier {
         InputStream ksStream = this.getClass().getResourceAsStream(JwtVerifier.keystorePath);
         assertNotNull("Keystore resource not found!", this.getClass().getResource(JwtVerifier.keystorePath));
 
-        char[] password = new String("secret").toCharArray();
+        char[] password = "secret".toCharArray();
         ks.load(ksStream, password);
 
         // Get the private key to use to sign the JWT.  Normally we would not do this but

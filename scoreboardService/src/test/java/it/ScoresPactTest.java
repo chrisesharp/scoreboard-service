@@ -29,7 +29,7 @@ public class ScoresPactTest {
   private int port = Integer.parseInt(System.getProperty("liberty.test.port"));
   private String endpoint = "/scoreboard/reset";
   private String url = "http://localhost:" + port + endpoint;
-  Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
+  private Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
   
   @TestTarget
   public final Target target = new HttpTarget(port);

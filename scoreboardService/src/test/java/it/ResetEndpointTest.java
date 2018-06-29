@@ -28,9 +28,7 @@ public class ResetEndpointTest {
   private final String RESET = "/scoreboard/reset";
   private final String TESTNAME = "TESTUSER";
 
-  String baseUrl = "https://localhost:" + System.getProperty("liberty.test.ssl.port");
-
-  String authHeader;
+  private String baseUrl = "https://localhost:" + System.getProperty("liberty.test.ssl.port");
 
   @Test
   public void testGetResetWithoutAdminRole() throws Exception {
