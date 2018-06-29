@@ -10,7 +10,7 @@
 /.classpath
 /.project
 /.settings
-
+/keystore/src/main/resources/keystore.jceks
 /caches
 /local.properties
 .*.swp
