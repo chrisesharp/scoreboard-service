@@ -137,9 +137,9 @@
             <version>${threetenbp-version}</version>
         </dependency>
         <dependency>
-            <groupId>io.openliberty.guides</groupId>
+            <groupId>projects</groupId>
             <artifactId>resources</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- Test dependencies -->
         <dependency>
@@ -208,7 +208,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Configure javametrics monitoring -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -236,7 +235,7 @@
                         <configuration>
                             <artifactItems>
                                 <artifact>
-                                    <groupId>io.openliberty.guides</groupId>
+                                    <groupId>projects</groupId>
                                     <artifactId>resources</artifactId>
                                     <type>jar</type>
                                     <overWrite>false</overWrite>
