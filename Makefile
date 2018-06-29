@@ -22,8 +22,8 @@ verify:
 
 .PHONY: coverage
 coverage:
-	mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package com.gavinmogan:codacy-maven-plugin:coverage \
-		-DcoverageReportFile=target/site/jacoco-ut/jacoco.xml \
+	mvn com.gavinmogan:codacy-maven-plugin:coverage \
+		-DcoverageReportFile=scoreboardService/target/site/jacoco/jacoco.xml \
 		-DprojectToken=$(CODACY_PROJECT_TOKEN) -DapiToken=$(CODACY_API_TOKEN)
 
 .PHONY: run
