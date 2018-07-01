@@ -22,19 +22,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
-/*
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-*/
-
 @Tag(ref = "Scoreboard")
-//@Api(tags = { "Scoreboard" })
 @Path("")
-//@ApiModel()
 public class Scoreboard {
 
   @Inject
@@ -43,8 +32,6 @@ public class Scoreboard {
   @GET
   @Path("/scores")
   @Produces(MediaType.APPLICATION_JSON)
-  //@ApiOperation(value = "Get scores as a list", responseContainer = "List", response = Score.class)
-  //@ApiResponses({ @ApiResponse(code = 200, message = "scores", responseContainer = "List", response = Score.class) })
   @Operation(
     summary = "Get scores",
     description = "Get top 10 scores from the scoreboard",
@@ -71,8 +58,6 @@ public class Scoreboard {
   @Path("/scores")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  //@ApiOperation("Post a score to the scoreboard")
-  //@ApiResponses({ @ApiResponse(code = 200, message = "Score added", response = String.class) })
   @Operation(
     summary = "Post score",
     description = "Post a score to the scoreboard",
@@ -93,7 +78,6 @@ public class Scoreboard {
     )
   })
   public synchronized Response addScore(
-    //@ApiParam(required = true) 
     @RequestBody(
         description = "New score",
         required = true,
@@ -114,8 +98,6 @@ public class Scoreboard {
   @Path("/reset")
   @Produces(MediaType.TEXT_PLAIN)
   @RolesAllowed({ "admin" })
-  //@ApiOperation("Reset the scoreboard")
-  //@ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
   @Operation(
     summary = "Reset the scoreboard",
     operationId = "reset"
@@ -156,8 +138,6 @@ public class Scoreboard {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
   @RolesAllowed({ "admin" })
-  //@ApiOperation("Reset the scoreboard to a given state")
-  //@ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
   @Operation(
     summary = "Reset the scoreboard to a given state",
     operationId = "reset"
