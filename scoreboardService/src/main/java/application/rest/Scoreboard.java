@@ -1,6 +1,7 @@
 package application.rest;
 
 import javax.inject.Inject;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,62 +12,194 @@ import javax.ws.rs.core.Response;
 
 import application.persistence.ScoreboardInMemory;
 import application.persistence.ScoreboardPersistence;
+
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+
+/*
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+*/
 
-import javax.annotation.security.RolesAllowed;
-
-@Api(tags = { "Scoreboard" })
-@Path("/")
-@ApiModel()
+@Tag(ref = "Scoreboard")
+//@Api(tags = { "Scoreboard" })
+@Path("")
+//@ApiModel()
 public class Scoreboard {
 
   @Inject
   private ScoreboardPersistence persistence = new ScoreboardInMemory();
 
   @GET
-  @Path("scores")
-  @ApiOperation(value = "Get scores as a list", responseContainer = "List", response = Score.class)
-  @ApiResponses({ @ApiResponse(code = 200, message = "scores", responseContainer = "List", response = Score.class) })
+  @Path("/scores")
   @Produces(MediaType.APPLICATION_JSON)
+  //@ApiOperation(value = "Get scores as a list", responseContainer = "List", response = Score.class)
+  //@ApiResponses({ @ApiResponse(code = 200, message = "scores", responseContainer = "List", response = Score.class) })
+  @Operation(
+    summary = "Get scores",
+    description = "Get top 10 scores from the scoreboard",
+    operationId = "scores"
+  )
+  @APIResponses(value = { 
+    @APIResponse(
+      responseCode = "200",
+      description = "scores",
+      content = @Content(
+        mediaType = "application/json",
+        schema = @Schema(
+          type = SchemaType.ARRAY, 
+          implementation = Score.class
+        )
+      )
+    )
+  })
   public Response scores() {
     return Response.ok().entity(persistence.getTopTenScores()).build();
   }
 
   @POST
-  @Path("scores")
-  @ApiOperation("Post a score to the scoreboard")
+  @Path("/scores")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  @ApiResponses({ @ApiResponse(code = 200, message = "Score added", response = String.class) })
-  public synchronized Response addScore(@ApiParam(required = true) Score score) {
+  //@ApiOperation("Post a score to the scoreboard")
+  //@ApiResponses({ @ApiResponse(code = 200, message = "Score added", response = String.class) })
+  @Operation(
+    summary = "Post score",
+    description = "Post a score to the scoreboard",
+    operationId = "addScore"
+  )
+  @APIResponses(value = { 
+    @APIResponse(
+      responseCode = "200",
+      description = "Score added",
+      content = @Content(
+        mediaType = "text/plain",
+        schema = @Schema(
+          type = SchemaType.STRING, 
+          implementation = String.class,
+          example = "Thanks"
+        )
+      )
+    )
+  })
+  public synchronized Response addScore(
+    //@ApiParam(required = true) 
+    @RequestBody(
+        description = "New score",
+        required = true,
+        content = @Content(
+            mediaType = "application/json",
+            schema = @Schema(
+                name = "Score",
+                type = SchemaType.OBJECT,
+                required = true,
+                implementation = Score.class)
+        )
+    ) Score score) {
     persistence.addScore(score);
     return Response.ok().entity("Thanks").build();
   }
   
   @GET
-  @Path("reset")
+  @Path("/reset")
   @Produces(MediaType.TEXT_PLAIN)
   @RolesAllowed({ "admin" })
-  @ApiOperation("Reset the scoreboard")
-  @ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
+  //@ApiOperation("Reset the scoreboard")
+  //@ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
+  @Operation(
+    summary = "Reset the scoreboard",
+    operationId = "reset"
+  )
+  @APIResponses(value = { 
+    @APIResponse(
+      responseCode = "200",
+      description = "Scoreboard reset",
+      content = @Content(
+        mediaType = "text/plain",
+        schema = @Schema(
+          type = SchemaType.STRING, 
+          implementation = String.class,
+          example = "Reset"
+        )
+      )
+    ),
+    @APIResponse(
+      responseCode = "403",
+      description = "Scoreboard reset forbidden",
+      content = @Content(
+        mediaType = "text/plain",
+        schema = @Schema(
+          type = SchemaType.STRING, 
+          implementation = String.class,
+          example = "Reset"
+        )
+      )
+    )
+  })
   public synchronized Response reset() {
     persistence.deleteAll();
     return Response.ok().entity("Reset").build();
   }
   
   @POST
-  @Path("reset")
+  @Path("/reset")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
   @RolesAllowed({ "admin" })
-  @ApiOperation("Reset the scoreboard to a given state")
-  @ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
-  public synchronized Response reset(com.ibm.json.java.JSONObject request) {
+  //@ApiOperation("Reset the scoreboard to a given state")
+  //@ApiResponses({ @ApiResponse(code = 200, message = "Scoreboard reset", response = String.class) })
+  @Operation(
+    summary = "Reset the scoreboard to a given state",
+    operationId = "reset"
+  )
+  @APIResponses(value = { 
+    @APIResponse(
+      responseCode = "200",
+      description = "Scoreboard reset",
+      content = @Content(
+        mediaType = "text/plain",
+        schema = @Schema(
+          type = SchemaType.STRING, 
+          implementation = String.class,
+          example = "Reset"
+        )
+      )
+    ),
+    @APIResponse(
+      responseCode = "403",
+      description = "Scoreboard reset forbidden",
+      content = @Content(
+        mediaType = "text/plain",
+        schema = @Schema(
+          type = SchemaType.STRING, 
+          implementation = String.class,
+          example = "Reset"
+        )
+      )
+    )
+  })  
+  public synchronized Response resetToState(
+    @RequestBody(
+        description = "Reset to specific test state",
+        required = true,
+        content = @Content(
+            mediaType = "application/json",
+            schema = @Schema(
+                type = SchemaType.STRING,
+                implementation = String.class
+            )
+        )
+    ) com.ibm.json.java.JSONObject request) {
     String state = (String) request.get("state");
     persistence.deleteAll();
     System.out.println("State requested = " + state);

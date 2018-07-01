@@ -10,7 +10,7 @@
             "description": "ScoreboardConsumerPactTest test add score.",
             "request": {
                 "method": "POST",
-                "path": "/scoreboard/scores",
+                "path": "/scores",
                 "headers": {
                     "Content-Type": "application/json",
                     "accept": "text/plain"
@@ -37,7 +37,7 @@
             "description": "ScoreboardConsumerPactTest test add higher score.",
             "request": {
                 "method": "POST",
-                "path": "/scoreboard/scores",
+                "path": "/scores",
                 "headers": {
                     "Content-Type": "application/json",
                     "accept": "text/plain"
@@ -64,7 +64,7 @@
             "description": "ScoreboardConsumerPactTest test get scores.",
             "request": {
                 "method": "GET",
-                "path": "/scoreboard/scores",
+                "path": "/scores",
                 "headers": {
                     "accept": "application/json"
                 },

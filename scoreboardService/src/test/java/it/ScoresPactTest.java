@@ -26,13 +26,14 @@ import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 @Provider("scoreboard_provider")
 @PactFolder("pacts")
 public class ScoresPactTest {
-  private int port = Integer.parseInt(System.getProperty("liberty.test.port"));
-  private String endpoint = "/scoreboard/reset";
-  private String url = "http://localhost:" + port + endpoint;
+  private final int port = Integer.parseInt(System.getProperty("liberty.test.port"));
+  private final String rootPath = "/scoreboard";
+  private final String url = "http://localhost:" + port + "/scoreboard";
+  private final String stateUrl = url + "/reset";
   private Client client = ClientBuilder.newClient().register(JsrJsonpProvider.class);
   
   @TestTarget
-  public final Target target = new HttpTarget(port);
+  public final Target target = new HttpTarget("http", "localhost", port, rootPath, true);
 
   @State("empty scoreboard")
   public void toEmptyState() {
@@ -55,13 +56,13 @@ public class ScoresPactTest {
   }
   
   private void sendRequest(JsonObject state) {
-    Invocation.Builder request = client.target(url).request();
+    Invocation.Builder request = client.target(stateUrl).request();
     Entity<JsonObject> entity = Entity.entity(state, MediaType.APPLICATION_JSON);
     request.post(entity).close();
   }
   
   private void sendRequest() {
-    Invocation.Builder request = client.target(url).request();
+    Invocation.Builder request = client.target(stateUrl).request();
     request.get().close();
   }
 }

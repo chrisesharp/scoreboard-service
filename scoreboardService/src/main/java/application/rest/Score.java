@@ -1,6 +1,8 @@
 package application.rest;
 
-import io.swagger.annotations.*;
+//import io.swagger.annotations.*;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,17 +10,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Api(tags={"Scoreboard"})
-@ApiModel()
+@Tag(ref = "Scoreboard")
+//@Api(tags={"Scoreboard"})
+//@ApiModel()
 @Entity
 public class Score implements Comparable<Score> {
   
   @Column
-  @ApiModelProperty(required = true, example = "chris")
+  @Schema(required = true, example = "chris")
+  //@ApiModelProperty(required = true, example = "chris")
   private String player;
 
   @Column
-  @ApiModelProperty(required = true, example = "10000")
+  @Schema(required = true, example = "10000")
+  //@ApiModelProperty(required = true, example = "10000")
   private int score;
   
   @Id
