@@ -36,15 +36,14 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
             email = "foo@bar.com"),
         license = @License(
             name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html")),
-        security = @SecurityRequirement(name = "scoreboardService_auth")
+            url = "http://www.apache.org/licenses/LICENSE-2.0.html"))
 )
 @SecurityScheme(
     securitySchemeName = "scoreboardService_auth",
     description = "authentication needed to access scoreboard service",
-    type = SecuritySchemeType.APIKEY,
-    apiKeyName = "api_key",
-    in = SecuritySchemeIn.HEADER
+    type = SecuritySchemeType.HTTP,
+    scheme = "bearer",
+    bearerFormat = "JWT"
 ) 
 @Schema(
     name = "Scoreboard REST API",

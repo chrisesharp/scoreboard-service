@@ -15,6 +15,7 @@ import application.persistence.ScoreboardPersistence;
 
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
@@ -102,6 +103,7 @@ public class Scoreboard {
     summary = "Reset the scoreboard",
     operationId = "reset"
   )
+  @SecurityRequirement(name = "scoreboardService_auth")
   @APIResponses(value = { 
     @APIResponse(
       responseCode = "200",
@@ -142,6 +144,7 @@ public class Scoreboard {
     summary = "Reset the scoreboard to a given state",
     operationId = "reset"
   )
+  @SecurityRequirement(name = "scoreboardService_auth")
   @APIResponses(value = { 
     @APIResponse(
       responseCode = "200",
