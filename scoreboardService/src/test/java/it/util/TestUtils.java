@@ -31,8 +31,11 @@ public class TestUtils {
     public static final int FORBIDDEN = Status.FORBIDDEN.getStatusCode();
     public static final String ResetOK = "Reset";
     
-    public static Response processRequest(String url, String method, String payload,
-            String authHeader) {
+    public static Response processRequest(
+      String url, 
+      String method, 
+      String payload, 
+      String authHeader) {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url);
         Builder builder = target.request();

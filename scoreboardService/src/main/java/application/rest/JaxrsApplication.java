@@ -20,10 +20,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 
-//import io.swagger.annotations.Info;
-//import io.swagger.annotations.SwaggerDefinition;
-//import io.swagger.annotations.Tag;
-
 @ApplicationPath("/")
 
 @OpenAPIDefinition(
@@ -57,19 +53,6 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
         description = "For more information, see the link.",
         url = "http://exampleurl.com/schema")
     )
-/*
-@SwaggerDefinition(
-  info = @Info(
-            description = "scoreboard REST service",
-            version = "1.0.0",
-            title = "scoreboard API"
-  ),
-  tags = {
-          @Tag(name = "Scoreboard",
-               description = "Scoreboard REST service")
-          }
-)
-*/
 
 public class JaxrsApplication extends Application {
   @Override
