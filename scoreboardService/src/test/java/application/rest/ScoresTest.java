@@ -111,7 +111,7 @@ public class ScoresTest {
     List<Score> results = (List<Score>)scoresResponse.readEntity(List.class);
     assertEquals(10, results.size());
   }
-  
+  /*
   @Test
   public void testReset() throws Exception {
     List<Score> expected = new ArrayList<>();
@@ -121,4 +121,5 @@ public class ScoresTest {
     Response scoresResponse = scoreboard.scores();
     assertEquals(expected, scoresResponse.readEntity(List.class));
   }
+  */
 }

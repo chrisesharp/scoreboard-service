@@ -59,11 +59,13 @@ public class Scoreboard {
   @Path("/scores")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
+  @RolesAllowed({ "user" })
   @Operation(
     summary = "Post score",
     description = "Post a score to the scoreboard",
     operationId = "addScore"
   )
+  @SecurityRequirement(name = "scoreboardService_auth_Bearer")
   @APIResponses(value = { 
     @APIResponse(
       responseCode = "200",
@@ -95,6 +97,7 @@ public class Scoreboard {
     return Response.ok().entity("Thanks").build();
   }
   
+  /*
   @GET
   @Path("/reset")
   @Produces(MediaType.TEXT_PLAIN)
@@ -103,7 +106,7 @@ public class Scoreboard {
     summary = "Reset the scoreboard",
     operationId = "reset"
   )
-  @SecurityRequirement(name = "scoreboardService_auth")
+  @SecurityRequirement(name = "scoreboardService_auth_Bearer")
   @APIResponses(value = { 
     @APIResponse(
       responseCode = "200",
@@ -134,17 +137,19 @@ public class Scoreboard {
     persistence.deleteAll();
     return Response.ok().entity("Reset").build();
   }
+  */
   
   @POST
   @Path("/reset")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  @RolesAllowed({ "admin" })
+  //@RolesAllowed({ "admin" })
+  /*
   @Operation(
     summary = "Reset the scoreboard to a given state",
     operationId = "reset"
   )
-  @SecurityRequirement(name = "scoreboardService_auth")
+  @SecurityRequirement(name = "scoreboardService_auth_Bearer")
   @APIResponses(value = { 
     @APIResponse(
       responseCode = "200",
@@ -171,8 +176,9 @@ public class Scoreboard {
       )
     )
   })  
-  public synchronized Response resetToState(
-    @RequestBody(
+  */
+  public synchronized Response reset(
+    /*@RequestBody(
         description = "Reset to specific test state",
         required = true,
         content = @Content(
@@ -182,7 +188,8 @@ public class Scoreboard {
                 implementation = String.class
             )
         )
-    ) com.ibm.json.java.JSONObject request) {
+    ) */
+    com.ibm.json.java.JSONObject request) {
     String state = (String) request.get("state");
     persistence.deleteAll();
     System.out.println("State requested = " + state);

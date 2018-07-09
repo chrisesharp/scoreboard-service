@@ -10,7 +10,7 @@
 /.classpath
 /.project
 /.settings
-/keystore/src/main/resources/keystore.jceks
+/keystore/src/main/resources/keystore.jks
 */.settings
 */.classpath
 */.project

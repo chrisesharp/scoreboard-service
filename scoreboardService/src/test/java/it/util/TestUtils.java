@@ -29,7 +29,7 @@ import javax.ws.rs.core.Response.Status;
 public class TestUtils {
     public static final int OK = Status.OK.getStatusCode();
     public static final int FORBIDDEN = Status.FORBIDDEN.getStatusCode();
-    public static final String ResetOK = "Reset";
+    public static final String ScorePostOK = "Thanks";
     
     public static Response processRequest(
       String url, 

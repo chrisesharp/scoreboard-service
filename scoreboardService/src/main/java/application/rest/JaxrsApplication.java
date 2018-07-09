@@ -17,6 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 
 
 @ApplicationPath("/")
@@ -35,15 +36,26 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
             email = "foo@bar.com"),
         license = @License(
             name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html"))
+            url = "http://www.apache.org/licenses/LICENSE-2.0.html")
+    )
 )
+
 @SecurityScheme(
-    securitySchemeName = "scoreboardService_auth",
+    securitySchemeName = "scoreboardService_auth_JWT",
     description = "authentication needed to access scoreboard service",
     type = SecuritySchemeType.HTTP,
     scheme = "bearer",
     bearerFormat = "JWT"
-) 
+)
+
+@SecurityScheme(
+    securitySchemeName = "scoreboardService_auth_Bearer",
+    description = "authentication needed to access scoreboard service",
+    type = SecuritySchemeType.APIKEY,
+    in = SecuritySchemeIn.HEADER,
+    apiKeyName = "Authorization"
+)
+
 @Schema(
     name = "Scoreboard REST API",
     description = "API for scoreboard",

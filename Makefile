@@ -1,4 +1,5 @@
 PORT = 32784
+SSL_PORT = 32443
 IMAGE = scoreboard:v1.0.0
 CHART = chart/scoreboard
 
@@ -19,6 +20,7 @@ docker:
 .PHONY: verify
 verify:
 	mvn verify
+	mvn liberty:stop-server
 
 .PHONY: coverage
 coverage:
@@ -28,7 +30,7 @@ coverage:
 
 .PHONY: run
 run:
-	docker run --rm -p$(PORT):9080 $(IMAGE)
+	docker run --rm -p$(PORT):9080 -p$(SSL_PORT):9443 $(IMAGE)
 	
 .PHONY: install
 install:

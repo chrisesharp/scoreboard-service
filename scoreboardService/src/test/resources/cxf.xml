@@ -27,8 +27,8 @@
     <http:tlsClientParameters>
       <!-- Trust store contains the self-signed Liberty user server certificate. -->
       <sec:trustManagers>
-        <sec:keyStore type="JCEKS" password="secret"
-                      resource="truststore/keystore.jceks"/>
+        <sec:keyStore type="JKS" password="secret"
+                      resource="truststore/keystore.jks"/>
       </sec:trustManagers>
       <sec:cipherSuitesFilter>
         <!-- these filters ensure that a ciphersuite with

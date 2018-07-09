@@ -23,30 +23,32 @@ import org.junit.Test;
 import it.util.TestUtils;
 import it.util.JwtVerifier;
 
-public class ResetEndpointTest {
+public class ScoreEndpointTest {
 
-  private final String RESET = "/scoreboard/reset";
+  private final String SCORES = "/scoreboard/scores";
   private final String TESTNAME = "TESTUSER";
 
   private String baseUrl = "https://localhost:" + System.getProperty("liberty.test.ssl.port");
+  private String scoresUrl = baseUrl + SCORES;
 
   @Test
-  public void testGetResetWithoutAdminRole() throws Exception {
-    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
-    String resetUrl = baseUrl + RESET;
-    Response resetResponse = TestUtils.processRequest(resetUrl, "GET", null, authHeader);
+  public void testGetScoresWithoutJWT() throws Exception {
+    Response resetResponse = TestUtils.processRequest(scoresUrl, "GET", null, null);
 
     assertEquals(
-        "HTTP response code should have been " + TestUtils.FORBIDDEN + ".",
-        TestUtils.FORBIDDEN, resetResponse.getStatus()
+        "HTTP response code should have been " + TestUtils.OK + ".",
+        TestUtils.OK, resetResponse.getStatus()
     );
   }
   
   @Test
-  public void testGetResetWithAdminRole() throws Exception {
-    String authHeader = "Bearer " + new JwtVerifier().createAdminJwt(TESTNAME);
-    String resetUrl = baseUrl + RESET;
-    Response resetResponse = TestUtils.processRequest(resetUrl, "GET", null, authHeader);
+  public void testPostScoresWithPlayerRole() throws Exception {
+    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
+    JsonObjectBuilder state = Json.createObjectBuilder();
+    state.add("player","chris");
+    state.add("score",1000);
+    Response resetResponse = TestUtils.processRequest(scoresUrl, "POST", state.build().toString(), authHeader);
+    resetResponse = TestUtils.processRequest(scoresUrl, "POST", state.build().toString(), authHeader);
 
     assertEquals(
         "HTTP response code should have been " + TestUtils.OK + ".",
@@ -54,18 +56,18 @@ public class ResetEndpointTest {
     );
     
     assertEquals(
-        "Response body should have been " + TestUtils.ResetOK + ".",
-        TestUtils.ResetOK, resetResponse.readEntity(String.class)
+        "Response body should have been " + TestUtils.ScorePostOK + ".",
+        TestUtils.ScorePostOK, resetResponse.readEntity(String.class)
     );
   }
   
   @Test
-  public void testPostResetWithoutAdminRole() throws Exception {
-    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
-    String resetUrl = baseUrl + RESET;
+  public void testPostScoresWithoutPlayerRole() throws Exception {
+    String authHeader = "Bearer " + new JwtVerifier().createAdminJwt(TESTNAME);
     JsonObjectBuilder state = Json.createObjectBuilder();
-    state.add("state","scoreboard with two scores");
-    Response resetResponse = TestUtils.processRequest(resetUrl, "POST", state.build().toString(), authHeader);
+    state.add("player","chris");
+    state.add("score",1000);
+    Response resetResponse = TestUtils.processRequest(scoresUrl, "POST", state.build().toString(), authHeader);
     
     assertEquals("HTTP response code should have been "
         + TestUtils.FORBIDDEN + ".", TestUtils.FORBIDDEN,

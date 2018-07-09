@@ -63,7 +63,7 @@ public class JwtVerifier {
     // The SSL port we'll use in our tests. The ssl port of the backend service.
     private static final String libertySslPort = System.getProperty("liberty.backend.service.ssl.port");
 
-    private static final String keystorePath = "/keystore.jceks";
+    private static final String keystorePath = "/keystore.jks";
 
     /**
      * Validate that the response contains an authorization header, and that the JWT inside can be
@@ -128,6 +128,17 @@ public class JwtVerifier {
      *
      * @return A base 64 encoded JWT.
      */
+    public String createPlayerJwt(String username) throws GeneralSecurityException, IOException {
+        Set<String> groups = new HashSet<String>();
+        groups.add("player");
+        return createJwt(username, groups);
+    }
+    
+    /**
+     * Make a microprofile-compliant JWT with the correct secret key.
+     *
+     * @return A base 64 encoded JWT.
+     */
     public String createAdminJwt(String username) throws GeneralSecurityException, IOException {
         Set<String> groups = new HashSet<String>();
         groups.add("admin");
@@ -144,7 +155,7 @@ public class JwtVerifier {
 
         // Create and Base64 encode the claims portion of the JWT
         JsonObject claimsObj = Json.createObjectBuilder()
-                        .add("exp", (System.currentTimeMillis() / 1000) + 300)  // Expire time
+                        .add("exp", (System.currentTimeMillis() / 1000) + 30000)  // Expire time
                         .add("iat", (System.currentTimeMillis() / 1000))        // Issued time
                         .add("aud", "scoreboard")                              // Audience
                         .add("jti", Long.toHexString(System.nanoTime()))        // Unique value
@@ -158,7 +169,7 @@ public class JwtVerifier {
         String headerClaimsEnc = headerEnc + "." + claimsEnc;
 
         // Open the keystore that the server will use to validate the JWT
-        KeyStore ks = KeyStore.getInstance("JCEKS");
+        KeyStore ks = KeyStore.getInstance("JKS");
         InputStream ksStream = this.getClass().getResourceAsStream(JwtVerifier.keystorePath);
         assertNotNull("Keystore resource not found!", this.getClass().getResource(JwtVerifier.keystorePath));
 

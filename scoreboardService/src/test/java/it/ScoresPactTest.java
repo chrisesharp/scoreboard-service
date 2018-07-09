@@ -7,7 +7,9 @@ import au.com.dius.pact.provider.junit.Provider;
 import au.com.dius.pact.provider.junit.State;
 import au.com.dius.pact.provider.junit.target.Target;
 import au.com.dius.pact.provider.junit.target.HttpTarget;
+import org.apache.http.HttpRequest;
 import au.com.dius.pact.provider.junit.target.TestTarget;
+import au.com.dius.pact.provider.junit.TargetRequestFilter;
 import au.com.dius.pact.provider.junit.loader.PactFolder;
 
 import javax.ws.rs.client.Client;
@@ -19,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonObject;
 import javax.json.Json;
+import it.util.JwtVerifier;
 
 import org.apache.cxf.jaxrs.provider.jsrjsonp.JsrJsonpProvider;
 
@@ -34,6 +37,16 @@ public class ScoresPactTest {
   
   @TestTarget
   public final Target target = new HttpTarget("http", "localhost", port, rootPath, true);
+
+  @TargetRequestFilter
+  public void exampleRequestFilter(HttpRequest request) {
+    String authHeader = null;
+    try {
+     authHeader = "Bearer " + new JwtVerifier().createUserJwt("TESTUSER");
+    } catch (Exception e) {}
+    
+    request.addHeader("Authorization", authHeader);
+  }
 
   @State("empty scoreboard")
   public void toEmptyState() {
