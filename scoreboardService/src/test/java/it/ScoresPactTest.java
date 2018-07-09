@@ -39,7 +39,7 @@ public class ScoresPactTest {
   public final Target target = new HttpTarget("http", "localhost", port, rootPath, true);
 
   @TargetRequestFilter
-  public void exampleRequestFilter(HttpRequest request) {
+  public void JwtRequestFilter(HttpRequest request) {
     String authHeader = null;
     try {
      authHeader = "Bearer " + new JwtVerifier().createUserJwt("TESTUSER");
