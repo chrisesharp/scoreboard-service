@@ -59,7 +59,7 @@ public class Scoreboard {
   @Path("/scores")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  @RolesAllowed({ "user" })
+  @RolesAllowed({ "player" })
   @Operation(
     summary = "Post score",
     description = "Post a score to the scoreboard",

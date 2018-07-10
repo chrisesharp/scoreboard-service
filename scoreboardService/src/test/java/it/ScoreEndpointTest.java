@@ -43,7 +43,7 @@ public class ScoreEndpointTest {
   
   @Test
   public void testPostScoresWithPlayerRole() throws Exception {
-    String authHeader = "Bearer " + new JwtVerifier().createUserJwt(TESTNAME);
+    String authHeader = "Bearer " + new JwtVerifier().createPlayerJwt(TESTNAME);
     JsonObjectBuilder state = Json.createObjectBuilder();
     state.add("player","chris");
     state.add("score",1000);

@@ -40,7 +40,7 @@ public class ScoresPactTest {
 
   @TargetRequestFilter
   public void JwtRequestFilter(HttpRequest request) throws Exception {
-    String authHeader = "Bearer " + new JwtVerifier().createUserJwt("TESTUSER");
+    String authHeader = "Bearer " + new JwtVerifier().createPlayerJwt("TESTUSER");
     request.addHeader("Authorization", authHeader);
   }
 

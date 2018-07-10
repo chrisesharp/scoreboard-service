@@ -2,6 +2,7 @@ PORT = 32784
 SSL_PORT = 32443
 IMAGE = scoreboard:v1.0.0
 CHART = chart/scoreboard
+SECURITY = /opt/ibm/wlp/usr/servers/defaultServer/resources/security
 
 all: build docker
 
@@ -31,7 +32,15 @@ coverage:
 .PHONY: run
 run:
 	docker run --rm -p$(PORT):9080 -p$(SSL_PORT):9443 $(IMAGE)
-	
+
+.PHONY: run-keystore
+run-keystore:
+	docker run --rm \
+	 		-p$(PORT):9080 \
+			-p$(SSL_PORT):9443 \
+			-v keystore:$(SECURITY) \
+			$(IMAGE)
+		
 .PHONY: install
 install:
 	helm dependency build $(CHART)
