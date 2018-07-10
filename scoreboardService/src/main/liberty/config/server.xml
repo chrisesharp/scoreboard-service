@@ -57,7 +57,7 @@
   <!-- This is the keystore that will be used by SSL and by JWT.
        The keystore is built using the maven keytool plugin -->
   <keyStore id="defaultKeyStore" 
-    location="keystore.jks" 
+    location="key.jks" 
     type="JKS" 
     password="secret" />
 

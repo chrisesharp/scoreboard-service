@@ -70,7 +70,7 @@
                 </executions>
                 <!-- Global configuration for the keytool plugin -->
                 <configuration>
-                    <keystore>${basedir}/src/main/resources/keystore.jks</keystore>
+                    <keystore>${basedir}/src/main/resources/key.jks</keystore>
                     <storepass>secret</storepass>
                     <storetype>jks</storetype>
                 </configuration>

@@ -63,7 +63,7 @@ public class JwtVerifier {
     // The SSL port we'll use in our tests. The ssl port of the backend service.
     private static final String libertySslPort = System.getProperty("liberty.backend.service.ssl.port");
 
-    private static final String keystorePath = "/keystore.jks";
+    private static final String keystorePath = "/key.jks";
 
     /**
      * Validate that the response contains an authorization header, and that the JWT inside can be
