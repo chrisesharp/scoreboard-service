@@ -18,8 +18,8 @@ build:
 docker:
 	docker build -t $(IMAGE) .
 
-.PHONY: verify
-verify:
+.PHONY: test
+test:
 	mvn verify
 	mvn liberty:stop-server
 

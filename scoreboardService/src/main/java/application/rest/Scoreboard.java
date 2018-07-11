@@ -23,10 +23,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
+import com.ibm.json.java.JSONObject;
+
 @Tag(ref = "Scoreboard")
 @Path("")
 public class Scoreboard {
-
+  private String deployment;
   @Inject
   private ScoreboardPersistence persistence = new ScoreboardInMemory();
 
@@ -97,115 +99,29 @@ public class Scoreboard {
     return Response.ok().entity("Thanks").build();
   }
   
-  /*
-  @GET
-  @Path("/reset")
-  @Produces(MediaType.TEXT_PLAIN)
-  @RolesAllowed({ "admin" })
-  @Operation(
-    summary = "Reset the scoreboard",
-    operationId = "reset"
-  )
-  @SecurityRequirement(name = "scoreboardService_auth_Bearer")
-  @APIResponses(value = { 
-    @APIResponse(
-      responseCode = "200",
-      description = "Scoreboard reset",
-      content = @Content(
-        mediaType = "text/plain",
-        schema = @Schema(
-          type = SchemaType.STRING, 
-          implementation = String.class,
-          example = "Reset"
-        )
-      )
-    ),
-    @APIResponse(
-      responseCode = "403",
-      description = "Scoreboard reset forbidden",
-      content = @Content(
-        mediaType = "text/plain",
-        schema = @Schema(
-          type = SchemaType.STRING, 
-          implementation = String.class,
-          example = "Reset"
-        )
-      )
-    )
-  })
-  public synchronized Response reset() {
-    persistence.deleteAll();
-    return Response.ok().entity("Reset").build();
-  }
-  */
-  
   @POST
   @Path("/reset")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
-  //@RolesAllowed({ "admin" })
-  /*
-  @Operation(
-    summary = "Reset the scoreboard to a given state",
-    operationId = "reset"
-  )
-  @SecurityRequirement(name = "scoreboardService_auth_Bearer")
-  @APIResponses(value = { 
-    @APIResponse(
-      responseCode = "200",
-      description = "Scoreboard reset",
-      content = @Content(
-        mediaType = "text/plain",
-        schema = @Schema(
-          type = SchemaType.STRING, 
-          implementation = String.class,
-          example = "Reset"
-        )
-      )
-    ),
-    @APIResponse(
-      responseCode = "403",
-      description = "Scoreboard reset forbidden",
-      content = @Content(
-        mediaType = "text/plain",
-        schema = @Schema(
-          type = SchemaType.STRING, 
-          implementation = String.class,
-          example = "Reset"
-        )
-      )
-    )
-  })  
-  */
-  public synchronized Response reset(
-    /*@RequestBody(
-        description = "Reset to specific test state",
-        required = true,
-        content = @Content(
-            mediaType = "application/json",
-            schema = @Schema(
-                type = SchemaType.STRING,
-                implementation = String.class
-            )
-        )
-    ) */
-    com.ibm.json.java.JSONObject request) {
-    String state = (String) request.get("state");
-    persistence.deleteAll();
-    System.out.println("State requested = " + state);
-    switch (state) {
-      case "empty scoreboard":
-        break;
-      case "scoreboard with low score":
-        persistence.addScore(new Score("david", 8000));
-        break;
-      case "scoreboard with two scores":
-        persistence.addScore(new Score("david", 8000));
-        persistence.addScore(new Score("chris", 10000));
-        break;
-      default:
-        System.out.println("Unrecognized state requested");
-        break;
+  public synchronized Response reset(JSONObject request) {
+    if (deployment != "production") {
+      String state = (String) request.get("state");
+      persistence.deleteAll();
+      System.out.println("State requested = " + state);
+      switch (state) {
+        case "empty scoreboard":
+          break;
+        case "scoreboard with low score":
+          persistence.addScore(new Score("david", 8000));
+          break;
+        case "scoreboard with two scores":
+          persistence.addScore(new Score("david", 8000));
+          persistence.addScore(new Score("chris", 10000));
+          break;
+        default:
+          System.out.println("Unrecognized state requested");
+          break;
+      }
     }
     return Response.ok().entity("Reset").build();
   }
