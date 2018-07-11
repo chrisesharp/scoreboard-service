@@ -1,4 +1,0 @@
-2018-07-10 17:34:48 INFO  BusApplicationContext:583 - Refreshing org.apache.cxf.bus.spring.BusApplicationContext@1282e98: startup date [Tue Jul 10 17:34:48 BST 2018]; root of context hierarchy
-2018-07-10 17:34:49 INFO  BusApplicationContext:478 - Loaded configuration file cxf.xml.
-2018-07-10 17:34:49 INFO  ControlledValidationXmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [META-INF/cxf/cxf.xml]
-2018-07-10 17:34:49 INFO  ControlledValidationXmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [cxf.xml]
