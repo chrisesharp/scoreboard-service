@@ -9,19 +9,21 @@ Perform a Maven and Docker build with:
 make
 ```
 
-## Verify
+## Test
 
 Verify the service still honours its `pact` with:
 ```
-make verify
+make test
 ```
 
 ## Run
 
 Run locally under Docker with:
 ```
-make run
+make run-keystore
 ```
+This will mount the keystore volume you will need to have created using:
+https://github.com/chrisesharp/shared-keystore 
 
 Run under Kubernetes in Docker for Mac with Helm installed:
 ```
