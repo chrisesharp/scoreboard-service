@@ -1,7 +1,8 @@
-PORT = 32784
+SERVICE=scoreboard
+PORT = 32000
 SSL_PORT = 32443
-IMAGE = scoreboard:v1.0.0
-CHART = chart/scoreboard
+IMAGE = $(SERVICE):v1.0.0
+CHART = chart/$(SERVICE)
 SECURITY = /opt/ibm/wlp/usr/servers/defaultServer/resources/security
 
 all: build docker
@@ -45,4 +46,9 @@ run-keystore:
 .PHONY: install
 install:
 	helm dependency build $(CHART)
-	helm upgrade --wait --install scoreboard $(CHART)
+	helm upgrade --wait --install $(SERVICE) $(CHART)
+	
+	
+.PHONY: remove
+remove:
+	helm delete --purge $(SERVICE)

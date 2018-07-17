@@ -39,6 +39,9 @@ spec:
             value: "{{ .Release.Name }}-postgresql"
           - name: POSTGRES_PORT
             value: "5432"
+        volumeMounts:
+        - mountPath: {{ .Values.keystore.mountPath }}
+          name: keystore-pv
       volumes:
       - name: keystore-pv
         persistentVolumeClaim:

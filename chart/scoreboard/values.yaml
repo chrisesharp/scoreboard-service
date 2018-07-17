@@ -13,6 +13,8 @@ image:
 service:
   name: Node
   type: NodePort
+  nodePort: 32000
+  nodePortHttps: 32443
   servicePort: 9080
   servicePortHttps: 9443
 hpa:
@@ -26,3 +28,5 @@ hpa:
       targetAverageUtilization: 70
 postgresql:
   postgresPassword: 4q3va4af
+keystore:
+  mountPath: /opt/ibm/wlp/usr/servers/defaultServer/resources/security

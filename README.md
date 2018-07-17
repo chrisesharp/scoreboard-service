@@ -29,6 +29,16 @@ Run under Kubernetes in Docker for Mac with Helm installed:
 ```
 make install
 ```
+This will mount the keystore persistent volume in Kubernetes you will have 
+needed to deploy using:
+https://github.com/chrisesharp/shared-keystore 
+
+## Remove
+
+To remove the service from your kubernetes, run:
+```
+make remove
+```
 
 ## Clean Up
 
