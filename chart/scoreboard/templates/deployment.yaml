@@ -39,3 +39,7 @@ spec:
             value: "{{ .Release.Name }}-postgresql"
           - name: POSTGRES_PORT
             value: "5432"
+      volumes:
+      - name: keystore-pv
+        persistentVolumeClaim:
+          claimName: keystore-pv-claim
