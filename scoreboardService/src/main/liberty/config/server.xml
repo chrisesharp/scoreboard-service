@@ -13,7 +13,10 @@
       <feature>jsonp-1.0</feature>
   </featureManager>
 
-  <webApplication name="scoreboard" location="${app.location}"/>
+  <webApplication
+    name="scoreboard" 
+    contextRoot="/scoreboard"
+    location="${app.location}" />
   
   <httpEndpoint
     httpPort="${default.http.port}" 
