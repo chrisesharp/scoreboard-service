@@ -4,6 +4,9 @@ SSL_PORT = 32443
 IMAGE = $(SERVICE):v1.0.0
 CHART = chart/$(SERVICE)
 SECURITY = /opt/ibm/wlp/usr/servers/defaultServer/resources/security
+ifndef DEPLOYMENT
+	DEPLOYMENT = local-kube
+endif
 
 all: build docker
 
@@ -46,7 +49,7 @@ run-keystore:
 .PHONY: install
 install:
 	helm dependency build $(CHART)
-	helm upgrade --wait --install $(SERVICE) $(CHART)
+	helm upgrade --wait --set deployment=$DEPLOYMENT --install $(SERVICE) $(CHART)
 	
 	
 .PHONY: remove

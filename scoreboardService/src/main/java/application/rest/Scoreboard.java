@@ -1,6 +1,7 @@
 package application.rest;
 
 import javax.inject.Inject;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -28,6 +29,8 @@ import com.ibm.json.java.JSONObject;
 @Tag(ref = "Scoreboard")
 @Path("")
 public class Scoreboard {
+  @Inject
+  @ConfigProperty(name="DEPLOYMENT", defaultValue="local" )
   private String deployment;
   @Inject
   private ScoreboardPersistence persistence = new ScoreboardInMemory();
@@ -104,7 +107,7 @@ public class Scoreboard {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
   public synchronized Response reset(JSONObject request) {
-    if (deployment != "production") {
+    if (!deployment.equals("production")) {
       String state = (String) request.get("state");
       persistence.deleteAll();
       System.out.println("State requested = " + state);

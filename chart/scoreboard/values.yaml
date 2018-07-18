@@ -30,3 +30,4 @@ postgresql:
   postgresPassword: 4q3va4af
 keystore:
   mountPath: /opt/ibm/wlp/usr/servers/defaultServer/resources/security
+deployment: kubernetes
