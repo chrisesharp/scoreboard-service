@@ -4,6 +4,7 @@
       <feature>mpOpenAPI-1.0</feature>
       <feature>mpHealth-1.0</feature>
       <feature>mpConfig-1.2</feature>
+      <feature>mpMetrics-1.1</feature>
       <feature>mpJwt-1.0</feature>
       <feature>ssl-1.0</feature>
       <feature>appSecurity-2.0</feature>
@@ -52,11 +53,11 @@
   </library>
     
   <!-- The MP JWT configuration that injects the caller's JWT into a ResourceScoped bean for inspection. -->
-  <mpJwt id="jwtUserConsumer" 
-    keyName="default" 
-    audiences="scoreboard" 
-    issuer="${jwt.issuer}"/>
-  
+  <mpJwt id="jwtUserConsumer" keyName="default"
+  	issuer="${jwt.issuer}">
+  	<audiences>scoreboard</audiences>
+  </mpJwt>
+
   <!-- This is the keystore that will be used by SSL and by JWT.
        The keystore is built using the maven keytool plugin -->
   <keyStore id="defaultKeyStore" 
@@ -64,4 +65,7 @@
     type="JKS" 
     password="secret" />
 
+  <administrator-role>
+    <group-access-id>group:http://openliberty.io/player</group-access-id>
+  </administrator-role>
 </server>
