@@ -2,6 +2,8 @@ package application.rest;
 
 import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,6 +58,7 @@ public class Scoreboard {
       )
     )
   })
+  @Timed
   public Response scores() {
     return Response.ok().entity(persistence.getTopTenScores()).build();
   }
@@ -85,6 +88,7 @@ public class Scoreboard {
       )
     )
   })
+  @Timed
   public synchronized Response addScore(
     @RequestBody(
         description = "New score",
@@ -106,6 +110,7 @@ public class Scoreboard {
   @Path("/reset")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.TEXT_PLAIN)
+  @Timed
   public synchronized Response reset(JSONObject request) {
     if (!deployment.equals("production")) {
       String state = (String) request.get("state");
