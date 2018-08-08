@@ -55,3 +55,7 @@ install:
 .PHONY: remove
 remove:
 	helm delete --purge $(SERVICE)
+
+.PHONY: run-prometheus
+run-prometheus:
+	./run_prometheus.sh

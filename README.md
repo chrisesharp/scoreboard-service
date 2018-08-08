@@ -33,6 +33,17 @@ This will mount the keystore persistent volume in Kubernetes you will have
 needed to deploy using:
 https://github.com/chrisesharp/shared-keystore 
 
+To also run prometheus connected to the scoreboard service you first need to obtain a JWT by running the scoreboard login service:
+https://github.com/chrisesharp/scoreboard-login-service
+And then visiting:
+http://localhost:32001/GitHubAuth
+Before starting prometheus:
+
+```
+export SCOREBOARD_JWT=<YOUR JWT>
+make run-prometheus
+```
+
 ## Remove
 
 To remove the service from your kubernetes, run:
